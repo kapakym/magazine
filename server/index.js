@@ -1,19 +1,17 @@
 require("dotenv").config();
 
-const express = require("express");
-const sequelize = require("./db");
-const models = require("./models/models");
-const cors = require("cors");
+const express = require("express"); //подключение framework Express
+const sequelize = require("./db"); //Подключение к БД
+const models = require("./models/models"); // Подключение шаблонов моделей БД
+const cors = require("cors"); // Покдлючение CORS
+const router = require("./routes/index");
 
 const PORT = process.env.PORT || 5000;
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-app.get("/", (req, res) => {
-  res.status(200).json({ message: "WORKING!!!" });
-});
+app.use("/api", router);
 
 const start = async () => {
   try {
