@@ -15,7 +15,6 @@ class DeviceController {
         price,
         brandId,
         typeId,
-        rating:0,
         img: filename
       });
       return res.json(device);
@@ -24,7 +23,7 @@ class DeviceController {
     }
   }
   async getAll(req, res) {
-    const devices = Device.findAll();
+    const devices =  await Device.findAll();
     return res.json(devices);
   }
   async getOne(req, res) {}
