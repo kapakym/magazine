@@ -73,7 +73,7 @@ Rating.belongsTo(Device);
 Device.hasMany(BasketDevice);
 BasketDevice.belongsTo(Device);
 
-Device.hasMany(DeviceInfo); // Одна запись в БД содержит много записей с характеристиками
+Device.hasMany(DeviceInfo, { as: "info" }); // Одна запись в БД содержит много записей с характеристиками
 DeviceInfo.belongsTo(Device);
 
 Type.belongsToMany(Brand, { through: TypeBrand });
