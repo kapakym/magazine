@@ -1,7 +1,8 @@
 import React from "react";
 import { Routes } from "react-router-dom";
-import { Route } from "react-router-dom";
+import { Route, Navigate} from "react-router-dom";
 import { authRoutes, publicRoutes } from "../routes";
+import { SHOP_ROUTE } from "../utils/consts";
 
 function AppRouter() {
   const isAuth = false;
@@ -14,6 +15,10 @@ function AppRouter() {
       {publicRoutes.map(({ path, Component }) => (
         <Route key={path} path={path} element={<Component />}></Route>
       ))}
+       <Route
+        path="*"
+        element={<Navigate to={SHOP_ROUTE} />}
+    />
     </Routes>
   );
 }
