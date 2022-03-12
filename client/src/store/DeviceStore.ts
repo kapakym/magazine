@@ -14,6 +14,7 @@ export default class DeviceStore {
     img: string;
   }>;
   _selectedType: { id: number; name: string } = { id: -1, name: "" };
+  _selectedBrand: { id: number; name: string } = { id: -1, name: "" };
 
   constructor() {
     this._types = [
@@ -42,6 +43,10 @@ export default class DeviceStore {
     this._selectedType = type;
   }
 
+  setSelectedBrand(brand: any) {
+    this._selectedBrand = brand;
+  }
+
   setTypes(types: any) {
     this._types = types;
   }
@@ -68,5 +73,9 @@ export default class DeviceStore {
 
   get selectedType() {
     return this._selectedType;
+  }
+
+  get selectedBrand() {
+    return this._selectedBrand;
   }
 }

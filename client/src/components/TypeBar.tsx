@@ -8,9 +8,13 @@ import { AppProviderType } from "../types/types";
 const TypeBar = observer(() => {
   const { device } = useContext<AppProviderType>(Context);
   return (
-    <ListGroup className="mt-2" style={{cursor:"pointer"}}>
+    <ListGroup className="mt-2" style={{ cursor: "pointer" }}>
       {device.types.map((type) => (
-        <ListGroup.Item key={type.id} onClick={() => device.setSelectedType(type)} active={type.id === device.selectedType?.id}>
+        <ListGroup.Item
+          key={type.id}
+          onClick={() => device.setSelectedType(type)}
+          active={type.id === device.selectedType.id}
+        >
           {type.name}
         </ListGroup.Item>
       ))}
