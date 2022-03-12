@@ -13,11 +13,14 @@ export default class DeviceStore {
     rating: number;
     img: string;
   }>;
+  _selectedType: { id: number; name: string } = { id: -1, name: "" };
 
   constructor() {
     this._types = [
       { id: 1, name: "Холодильники" },
       { id: 2, name: "Смартфоны" },
+      { id: 3, name: "Ноутбуки" },
+      { id: 4, name: "Телевизоры" },
     ];
     this._brands = [
       { id: 1, name: "Samsung" },
@@ -33,6 +36,10 @@ export default class DeviceStore {
       },
     ];
     makeAutoObservable(this);
+  }
+
+  setSelectedType(type: any) {
+    this._selectedType = type;
   }
 
   setTypes(types: any) {
@@ -57,5 +64,9 @@ export default class DeviceStore {
 
   get devices() {
     return this._device;
+  }
+
+  get selectedType() {
+    return this._selectedType;
   }
 }
