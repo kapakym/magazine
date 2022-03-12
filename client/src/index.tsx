@@ -3,9 +3,10 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import DeviceStore from "./store/DeviceStore";
 import UserStore from "./store/UserStore";
-import { UserType } from "./types/types";
+import { AppProviderType } from "./types/types";
 
 export const Context = createContext<any>(null);
+
 
 ReactDOM.render(
   <Context.Provider

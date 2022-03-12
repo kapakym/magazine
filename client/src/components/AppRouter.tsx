@@ -3,7 +3,6 @@ import { Routes } from "react-router-dom";
 import { Route, Navigate } from "react-router-dom";
 import { Context } from "../index";
 import { authRoutes, publicRoutes } from "../routes";
-import { UserType } from "../types/types";
 import { SHOP_ROUTE } from "../utils/consts";
 
 function AppRouter() {

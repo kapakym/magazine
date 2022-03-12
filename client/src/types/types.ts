@@ -1,5 +1,8 @@
+import DeviceStore from "../store/DeviceStore";
 import UserStore from "../store/UserStore";
 
-export interface UserType {
+export interface AppProviderType {
   user: UserStore;
+  device: DeviceStore;
+
 }
