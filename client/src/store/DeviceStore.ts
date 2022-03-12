@@ -1,4 +1,5 @@
 import { makeAutoObservable } from "mobx";
+import { DeviceType } from "../types/types";
 
 export default class DeviceStore {
   _types: Array<{
@@ -6,13 +7,7 @@ export default class DeviceStore {
     name: string;
   }>;
   _brands: Array<{ id: number; name: string }>;
-  _device: Array<{
-    id: number;
-    name: string;
-    price: number;
-    rating: number;
-    img: string;
-  }>;
+  _device: Array<DeviceType>;
   _selectedType: { id: number; name: string } = { id: -1, name: "" };
   _selectedBrand: { id: number; name: string } = { id: -1, name: "" };
 
@@ -30,6 +25,62 @@ export default class DeviceStore {
     this._device = [
       {
         id: 1,
+        name: "Iphone 12 pro",
+        price: 120000,
+        rating: 5,
+        img: "http://localhost:5000/8e7d5402-4828-48a1-b292-b04248784901.jpg",
+      },
+      {
+        id: 2,
+        name: "Iphone 12 pro",
+        price: 120000,
+        rating: 5,
+        img: "http://localhost:5000/8e7d5402-4828-48a1-b292-b04248784901.jpg",
+      },
+      {
+        id: 3,
+        name: "Iphone 12 pro",
+        price: 120000,
+        rating: 5,
+        img: "http://localhost:5000/8e7d5402-4828-48a1-b292-b04248784901.jpg",
+      },
+      {
+        id: 4,
+        name: "Iphone 12 pro",
+        price: 120000,
+        rating: 5,
+        img: "http://localhost:5000/8e7d5402-4828-48a1-b292-b04248784901.jpg",
+      },
+      {
+        id: 5,
+        name: "Iphone 12 pro",
+        price: 120000,
+        rating: 5,
+        img: "http://localhost:5000/8e7d5402-4828-48a1-b292-b04248784901.jpg",
+      },
+      {
+        id: 6,
+        name: "Iphone 12 pro",
+        price: 120000,
+        rating: 5,
+        img: "http://localhost:5000/8e7d5402-4828-48a1-b292-b04248784901.jpg",
+      },
+      {
+        id: 7,
+        name: "Iphone 12 pro",
+        price: 120000,
+        rating: 5,
+        img: "http://localhost:5000/8e7d5402-4828-48a1-b292-b04248784901.jpg",
+      },
+      {
+        id: 8,
+        name: "Iphone 12 pro",
+        price: 120000,
+        rating: 5,
+        img: "http://localhost:5000/8e7d5402-4828-48a1-b292-b04248784901.jpg",
+      },
+      {
+        id: 9,
         name: "Iphone 12 pro",
         price: 120000,
         rating: 5,
@@ -55,7 +106,7 @@ export default class DeviceStore {
     this._brands = brands;
   }
 
-  setDevices(devices: any) {
+  setDevices(devices: Array<DeviceType>) {
     this._device = devices;
   }
 
