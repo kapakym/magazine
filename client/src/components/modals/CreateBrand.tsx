@@ -16,7 +16,7 @@ function CreateBrand({ show, onHide }: CBType) {
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Добавить новый тип устройства
+          Добавить нового производителя устройства
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
