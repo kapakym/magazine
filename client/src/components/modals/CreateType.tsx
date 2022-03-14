@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
+import { createType } from "../../http/deviceAPI";
 interface CDType {
   show: boolean;
   onHide: () => void;
 }
 
 function CreateType({ show, onHide }: CDType) {
-  const addType = () => {};
+  const [value, setvalue] = useState("");
+  const addType = () => {
+    console.log("click")
+    createType(value).then(data=>setvalue(""));
+    onHide()
+  };
 
   return (
     <Modal
@@ -22,7 +28,11 @@ function CreateType({ show, onHide }: CDType) {
       </Modal.Header>
       <Modal.Body>
         <Form>
-          <Form.Control placeholder="Введите название типа" />
+          <Form.Control
+            value={value}
+            onChange={(e) => setvalue(e.target.value)}
+            placeholder="Введите название типа"
+          />
         </Form>
       </Modal.Body>
       <Modal.Footer>

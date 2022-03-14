@@ -25,6 +25,11 @@ interface infoType {
 function CreateDevice({ show, onHide }: CDType) {
   const { device } = useContext<AppProviderType>(Context);
   const [info, setinfo] = useState<infoType[] | []>([]);
+  const [name, setname] = useState("");
+  const [price, setprice] = useState(0);
+  const [file, setfile] = useState(null);
+  const [brand, setbrand] = useState(null);
+  const [type, settype] = useState(null);
 
   const addInfo = () => {
     const newInfo: infoType = {
@@ -92,7 +97,12 @@ function CreateDevice({ show, onHide }: CDType) {
                 <FormControl placeholder="Введите описание свойства" />
               </Col>
               <Col md={4}>
-                <Button variant={"outline-danger"} onClick={()=>removeInfo(element.number)}>Удалить</Button>
+                <Button
+                  variant={"outline-danger"}
+                  onClick={() => removeInfo(element.number)}
+                >
+                  Удалить
+                </Button>
               </Col>
             </Row>
           ))}
