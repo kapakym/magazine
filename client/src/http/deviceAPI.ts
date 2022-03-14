@@ -10,7 +10,7 @@ export const createType = async (nameType: string) => {
   return data;
 };
 
-export const fetchTypes = async (email: string, password: string) => {
+export const fetchTypes = async () => {
   const { data } = await $host.get("api/type");
 
   return data;

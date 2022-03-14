@@ -12,12 +12,7 @@ export default class DeviceStore {
   _selectedBrand: { id: number; name: string } = { id: -1, name: "" };
 
   constructor() {
-    this._types = [
-      { id: 1, name: "Холодильники" },
-      { id: 2, name: "Смартфоны" },
-      { id: 3, name: "Ноутбуки" },
-      { id: 4, name: "Телевизоры" },
-    ];
+    this._types = [];
     this._brands = [
       { id: 1, name: "Samsung" },
       { id: 2, name: "Apple" },
