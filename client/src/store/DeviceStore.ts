@@ -13,75 +13,8 @@ export default class DeviceStore {
 
   constructor() {
     this._types = [];
-    this._brands = [
-      { id: 1, name: "Samsung" },
-      { id: 2, name: "Apple" },
-    ];
-    this._device = [
-      {
-        id: 1,
-        name: "Iphone 12 pro",
-        price: 120000,
-        rating: 5,
-        img: "http://localhost:5000/8e7d5402-4828-48a1-b292-b04248784901.jpg",
-      },
-      {
-        id: 2,
-        name: "Iphone 12 pro",
-        price: 120000,
-        rating: 5,
-        img: "http://localhost:5000/8e7d5402-4828-48a1-b292-b04248784901.jpg",
-      },
-      {
-        id: 3,
-        name: "Iphone 12 pro",
-        price: 120000,
-        rating: 5,
-        img: "http://localhost:5000/8e7d5402-4828-48a1-b292-b04248784901.jpg",
-      },
-      {
-        id: 4,
-        name: "Iphone 12 pro",
-        price: 120000,
-        rating: 5,
-        img: "http://localhost:5000/8e7d5402-4828-48a1-b292-b04248784901.jpg",
-      },
-      {
-        id: 5,
-        name: "Iphone 12 pro",
-        price: 120000,
-        rating: 5,
-        img: "http://localhost:5000/8e7d5402-4828-48a1-b292-b04248784901.jpg",
-      },
-      {
-        id: 6,
-        name: "Iphone 12 pro",
-        price: 120000,
-        rating: 5,
-        img: "http://localhost:5000/8e7d5402-4828-48a1-b292-b04248784901.jpg",
-      },
-      {
-        id: 7,
-        name: "Iphone 12 pro",
-        price: 120000,
-        rating: 5,
-        img: "http://localhost:5000/8e7d5402-4828-48a1-b292-b04248784901.jpg",
-      },
-      {
-        id: 8,
-        name: "Iphone 12 pro",
-        price: 120000,
-        rating: 5,
-        img: "http://localhost:5000/8e7d5402-4828-48a1-b292-b04248784901.jpg",
-      },
-      {
-        id: 9,
-        name: "Iphone 12 pro",
-        price: 120000,
-        rating: 5,
-        img: "http://localhost:5000/8e7d5402-4828-48a1-b292-b04248784901.jpg",
-      },
-    ];
+    this._brands = [];
+    this._device = [];
     makeAutoObservable(this);
   }
 
