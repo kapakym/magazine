@@ -13,3 +13,8 @@ export interface DeviceType {
   rating: number;
   img: string;
 }
+
+export interface TypeType {
+  id: number;
+  name: string;
+}
