@@ -1,22 +1,34 @@
-import React, { useState } from "react";
+import { observer } from "mobx-react-lite";
+import React, { useContext, useState } from "react";
 import { Button, Card, Container, Form, Row } from "react-bootstrap";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Context } from "../index";
 import { login, registration } from "../http/userAPI";
-import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
+import { AppProviderType } from "../types/types";
+import { LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from "../utils/consts";
+import { AxiosError } from "axios";
 
-export default function Auth() {
+const Auth = observer(() => {
+  const { user } = useContext<AppProviderType>(Context);
   const location = useLocation();
+  const navigate = useNavigate();
   const isLogin = location.pathname === LOGIN_ROUTE;
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+
   const click = async () => {
-    console.log(click)
-    if (isLogin) {
-      const response = await login(email, password);
-      console.log(response);
-    } else {
-      const response = await registration(email, password);
-      console.log(response);
+    try {
+      let data: any;
+      if (isLogin) {
+        data = await login(email, password);
+      } else {
+        data = await registration(email, password);
+      }
+      user.setUser(data);
+      user.setIsAuth(true);
+      navigate(SHOP_ROUTE);
+    } catch (error: any) {
+      alert(error.response.data.message);
     }
   };
 
@@ -53,12 +65,14 @@ export default function Auth() {
               </div>
             )}
 
-            <Button variant={"outline-success"} onClick={()=>click()}>
-              {isLogin ? "Войти" : "Регистрация"}{" "}
+            <Button variant={"outline-success"} onClick={() => click()}>
+              {isLogin ? "Войти" : "Регистрация"}
             </Button>
           </Row>
         </Form>
       </Card>
     </Container>
   );
-}
+});
+
+export default Auth;
