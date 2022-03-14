@@ -18,3 +18,5 @@ export interface TypeType {
   id: number;
   name: string;
 }
+
+export const REACT_APP_API_URL = "http://localhost:5000/";

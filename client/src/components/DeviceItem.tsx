@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Col } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
-import { DeviceType } from "../types/types";
+import { DeviceType, REACT_APP_API_URL } from "../types/types";
 import star from "../assets/star.png";
 import { useNavigate } from "react-router-dom";
 import { DEVICE_ROUTE } from "../utils/consts";
@@ -20,7 +20,7 @@ function DeviceItem({ device }: DeviceItemType) {
         <Image
           width={150}
           height={150}
-          src={"http://localhost:5000/" + device.img}
+          src={REACT_APP_API_URL + device.img}
         />
         <div className="text-black-50 d-flex justify-content-between align-item-center mt-2">
           <div>Samsung</div>

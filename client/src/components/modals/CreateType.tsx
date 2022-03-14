@@ -1,11 +1,13 @@
 import React from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 interface CDType {
-    show: boolean;
-    onHide: ()=>void;
+  show: boolean;
+  onHide: () => void;
 }
 
-function CreateType({ show, onHide }:CDType) {
+function CreateType({ show, onHide }: CDType) {
+  const addType = () => {};
+
   return (
     <Modal
       show={show}
@@ -19,13 +21,17 @@ function CreateType({ show, onHide }:CDType) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-          <Form>
-              <Form.Control placeholder="Введите название типа"/>
-          </Form>
+        <Form>
+          <Form.Control placeholder="Введите название типа" />
+        </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="outline-danger" onClick={onHide}>Закрыть</Button>
-        <Button variant="outline-success" onClick={onHide}>Добавить</Button>
+        <Button variant="outline-danger" onClick={onHide}>
+          Закрыть
+        </Button>
+        <Button variant="outline-success" onClick={addType}>
+          Добавить
+        </Button>
       </Modal.Footer>
     </Modal>
   );
