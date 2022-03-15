@@ -13,6 +13,7 @@ function DevicePage() {
 
   useEffect(() => {
     fetchOneDevice(Number(id)).then((data) => {
+      console.log(data);
       setdevice(data);
     });
   }, []);
@@ -21,7 +22,11 @@ function DevicePage() {
     <Container className="mt-3">
       <Row>
         <Col md={4}>
-          <Image src={REACT_APP_API_URL+device.img} width={300} height={300} />
+          <Image
+            src={device.img ? REACT_APP_API_URL + device.img : ""}
+            width={300}
+            height={300}
+          />
         </Col>
         <Col md={4}>
           <Row className="d-flex flex-column align-items-center">
@@ -57,7 +62,7 @@ function DevicePage() {
       </Row>
       <Row className="d-flex flex-column m-3">
         <h1>Характеристики</h1>
-        {device.info.map((desc:any, index:number) => (
+        {device.info.map((desc: any, index: number) => (
           <Row
             key={desc.id}
             style={{
