@@ -32,23 +32,29 @@ export const fetchBrands = async () => {
 
 export const createDeivce = async (device: FormData) => {
   // try {
-    const { data } = await $authHost.post("api/device", device);
-    console.log("OK");
-    return data;
+  const { data } = await $authHost.post("api/device", device);
+  console.log("OK");
+  return data;
   // } catch (error) {
   //   console.log(error);
   // }
 };
 
-export const fetchDevice = async () => {
-  const { data } = await $host.get("api/device");
+export const fetchDevice = async (
+  typeId?: number,
+  brandId?: number,
+  page?: number,
+  limit?: number
+) => {
+  const { data } = await $host.get("api/device", {
+    params: { typeId, brandId, page, limit },
+  });
 
   return data;
 };
 
 export const fetchOneDevice = async (id: number) => {
-  
   const { data } = await $host.get("api/device/" + id);
-  console.log(data)
+  console.log(data);
   return data;
 };

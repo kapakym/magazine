@@ -7,6 +7,7 @@ import DeviceList from "../components/DeviceList";
 import TypeBar from "../components/TypeBar";
 import { AppProviderType } from "../types/types";
 import { fetchBrands, fetchDevice, fetchTypes } from "../http/deviceAPI";
+import Pages from "../components/Pages";
 
 const Shop = observer(() => {
   const { device } = useContext<AppProviderType>(Context);
@@ -18,10 +19,23 @@ const Shop = observer(() => {
     fetchBrands().then((data) => {
       device.setBrands(data);
     });
-    fetchDevice().then((data) => {
+    fetchDevice(undefined, undefined, device.page, 3).then((data) => {
       device.setDevices(data.rows);
+      device.setTotalCount(data.count);
     });
   }, []);
+
+  useEffect(() => {
+    fetchDevice(
+      device.selectedType?.id,
+      device.selectedBrand?.id,
+      device.page,
+      3
+    ).then((data) => {
+      device.setDevices(data.rows);
+      device.setTotalCount(data.count);
+    });
+  }, [device.page, device.selectedType, device.selectedBrand]);
 
   return (
     <Container>
@@ -32,6 +46,7 @@ const Shop = observer(() => {
         <Col md={9}>
           <BrandBar></BrandBar>
           <DeviceList />
+          <Pages />
         </Col>
       </Row>
     </Container>
