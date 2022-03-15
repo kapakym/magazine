@@ -3,9 +3,11 @@ const path = require("path");
 const { Device, DeviceInfo } = require("../models/models");
 const ApiError = require("../error/apiError");
 class DeviceController {
+
   async create(req, res, next) {
     try {
       const { name, price, brandId, typeId, info } = req.body;
+      console.log(req.body)
       // res.json(req.body);
       const { img } = req.files;
       let filename = uuid.v4() + ".jpg";

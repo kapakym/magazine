@@ -8,8 +8,8 @@ export default class DeviceStore {
   }>;
   _brands: Array<{ id: number; name: string }>;
   _device: Array<DeviceType>;
-  _selectedType: { id: number; name: string } = { id: -1, name: "" };
-  _selectedBrand: { id: number; name: string } = { id: -1, name: "" };
+  _selectedType: { id: number; name: string } | undefined;//  = { id: -1, name: "" };
+  _selectedBrand: { id: number; name: string } | undefined;// { id: -1, name: "" };
 
   constructor() {
     this._types = [];

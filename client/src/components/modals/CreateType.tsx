@@ -7,6 +7,7 @@ interface CDType {
 }
 
 function CreateType({ show, onHide }: CDType) {
+  
   const [value, setvalue] = useState("");
   const addType = () => {
     console.log("click")

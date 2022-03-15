@@ -1,4 +1,10 @@
-import React, { useContext, useState } from "react";
+import { observer } from "mobx-react-lite";
+import React, {
+  ChangeEventHandler,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import {
   Button,
   Col,
@@ -10,6 +16,7 @@ import {
   Row,
 } from "react-bootstrap";
 import { Context } from "../..";
+import { createDeivce, fetchBrands, fetchTypes } from "../../http/deviceAPI";
 import { AppProviderType } from "../../types/types";
 interface CDType {
   show: boolean;
@@ -22,14 +29,21 @@ interface infoType {
   number: number;
 }
 
-function CreateDevice({ show, onHide }: CDType) {
+const CreateDevice = observer(({ show, onHide }: CDType) => {
   const { device } = useContext<AppProviderType>(Context);
   const [info, setinfo] = useState<infoType[] | []>([]);
   const [name, setname] = useState("");
   const [price, setprice] = useState(0);
   const [file, setfile] = useState(null);
-  const [brand, setbrand] = useState(null);
-  const [type, settype] = useState(null);
+
+  useEffect(() => {
+    fetchTypes().then((data) => {
+      device.setTypes(data);
+    });
+    fetchBrands().then((data) => {
+      device.setBrands(data);
+    });
+  }, []);
 
   const addInfo = () => {
     const newInfo: infoType = {
@@ -42,6 +56,29 @@ function CreateDevice({ show, onHide }: CDType) {
 
   const removeInfo = (number: number) => {
     setinfo(info.filter((i) => i.number !== number));
+  };
+
+  const selectFile = (e: React.ChangeEvent<any>) => {
+    setfile(e.target.files[0]);
+  };
+
+  const changeInfo = (key: string, value: string, number: number) => {
+    setinfo(
+      info.map((i) => (i.number === number ? { ...i, [key]: value } : i))
+    );
+  };
+
+  const addDevice = () => {
+    console.log(info);
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("price", `${price}`);
+    formData.append("img", file ? file : "");
+    formData.append("brandId", `${device.selectedBrand?.id}`);
+    formData.append("typeId", `${device.selectedType?.id}`);
+    formData.append("info", JSON.stringify(info));
+
+    createDeivce(formData);
   };
 
   return (
@@ -59,31 +96,51 @@ function CreateDevice({ show, onHide }: CDType) {
       <Modal.Body>
         <Form>
           <Dropdown className="mt-2 mb-2">
-            <Dropdown.Toggle>Выберите тип устройства</Dropdown.Toggle>
+            <Dropdown.Toggle>
+              {device.selectedType?.name || "Выберите тип устройств"}
+            </Dropdown.Toggle>
             <Dropdown.Menu>
               {device.types.map((type) => (
-                <Dropdown.Item key={type.id}>{type.name}</Dropdown.Item>
+                <Dropdown.Item
+                  key={type.id}
+                  onClick={() => device.setSelectedType(type)}
+                >
+                  {type.name} 1
+                </Dropdown.Item>
               ))}
             </Dropdown.Menu>
           </Dropdown>
           <Dropdown className="mt-2 mb-2">
-            <Dropdown.Toggle>Выберите производителя устройства</Dropdown.Toggle>
+            <Dropdown.Toggle>
+              {device.selectedBrand?.name ||
+                "Выберите производителя устройства"}{" "}
+              2
+            </Dropdown.Toggle>
             <Dropdown.Menu>
               {device.brands.map((brand) => (
-                <Dropdown.Item key={brand.id}>{brand.name}</Dropdown.Item>
+                <Dropdown.Item
+                  key={brand.id}
+                  onClick={() => device.setSelectedBrand(brand)}
+                >
+                  {brand.name}
+                </Dropdown.Item>
               ))}
             </Dropdown.Menu>
           </Dropdown>
           <FormControl
             className="mt-2"
             placeholder="Введите название устройства"
+            value={name}
+            onChange={(e) => setname(e.target.value)}
           />
           <FormControl
             type="number"
             className="mt-2"
             placeholder="Введите стоимость устройства"
+            value={price}
+            onChange={(e) => setprice(Number(e.target.value))}
           />
-          <FormControl type="file" className="mt-2" />
+          <FormControl type="file" className="mt-2" onChange={selectFile} />
           <hr />
           <Button variant="outline-dark" onClick={addInfo}>
             Добавить новое свойство
@@ -91,10 +148,22 @@ function CreateDevice({ show, onHide }: CDType) {
           {info.map((element) => (
             <Row className="mt-2" key={element.number}>
               <Col md={4}>
-                <FormControl placeholder="Введите название свойства" />
+                <FormControl
+                  value={element.title}
+                  onChange={(e) =>
+                    changeInfo("title", e.target.value, element.number)
+                  }
+                  placeholder="Введите название свойства"
+                />
               </Col>
               <Col md={4}>
-                <FormControl placeholder="Введите описание свойства" />
+                <FormControl
+                  value={element.description}
+                  onChange={(e) =>
+                    changeInfo("description", e.target.value, element.number)
+                  }
+                  placeholder="Введите описание свойства"
+                />
               </Col>
               <Col md={4}>
                 <Button
@@ -112,12 +181,12 @@ function CreateDevice({ show, onHide }: CDType) {
         <Button variant="outline-danger" onClick={onHide}>
           Закрыть
         </Button>
-        <Button variant="outline-success" onClick={onHide}>
+        <Button variant="outline-success" onClick={addDevice}>
           Добавить
         </Button>
       </Modal.Footer>
     </Modal>
   );
-}
+});
 
 export default CreateDevice;

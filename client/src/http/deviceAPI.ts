@@ -30,11 +30,8 @@ export const fetchBrands = async () => {
   return data;
 };
 
-export const createDeivce = async (nameType: string) => {
-  const { data } = await $authHost.post("api/device", {
-    name: nameType,
-  });
-
+export const createDeivce = async (device: FormData) => {
+  const { data } = await $authHost.post("api/device", device);
   return data;
 };
 
